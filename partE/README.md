@@ -20,11 +20,11 @@ Incomplete functionality:
 -------------------------
 -Twitter get problem cannot finish.
 
--View the wine name cannot finish, but I try to write some code in the search_result.php and comment it.
-
 
 Any other notes for the marker:
 -------------------------------
+-Start the session in the searching.php.
+
 -In the search_result.php can back to the searching.php by the href.
 
--In the view_wine_name.php user can end the session and also back to the searching.php.
+-In the view_wine_names.php can end the session and back to the search page.
