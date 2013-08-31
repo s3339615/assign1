@@ -7,7 +7,7 @@
 	
 	//start the session here in searching page
 	session_start();
-	if(isset($_GET['sess'])) 
+	if(isset($_GET['startsession'])) 
 		$_SESSION['searchsess'] = array();
 	
 	
@@ -80,10 +80,11 @@
 	//check session start or not
 	if(!isset($_SESSION['searchsess'])) 
 	{
-		$template->setVariable("start_session", "<a href='searching.php?sess=y'>Session Start</a>");
+		//to start the session
+		$template->setVariable("start_session", "<a href='searching.php?startsession=y'>Session Start</a>");
 	} 
 	else 
-		$template->setVariable("start_session", 'Session Started!');
+		$template->setVariable("start_session", "Session Started!");
 	
 	$template->generateOutput();
 ?>

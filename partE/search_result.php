@@ -187,9 +187,11 @@
 		  wine_variety.variety_id = grape_variety.variety_id
 		  ORDER BY variety";
 	
-	$name_of_wine = array();
-	if(isset($_SESSION['searchsess'])) $name_of_wine = $_SESSION['searchsess'];
-	
+	//$name_of_wine = array();
+	//$x = 0;
+	//if(isset($_SESSION['searchsess'])) $name_of_wine = $_SESSION['searchsess'];
+	//echo 'search session here (try to set the wine name)</br>';
+	$_SESSION['nameofwines'] = array();
     foreach($result as $row) 
 	{
         $varieties = $database->query($query);
@@ -205,6 +207,12 @@
 		}
 
 	//	echo $row . 'row 2</br>';
+		
+		if(isset($_SESSION['nameofwines']))
+		{
+			array_push($_SESSION['nameofwines'], $row[1]);
+		}
+		
 		
 		$grape_variety = substr($str, 0, strlen($str)-2);
 		
@@ -236,39 +244,18 @@
 		//echo $row[1];
 		$template->setVariable("grape_variety", $grape_variety);
 		$template->addBlock("printinfo");
-	/*	
-		if(count($name_of_wine) == 0)
-			$name_of_wine[] = $row[1];
-		else
-		{
-			$flag = false;
-			for($x = 0; $x < count($name_of_wine); x++)
-			{
-				if($name_of_wine[$x] == $row[1])
-				{
-					$flag = true;
-					break;
-				}
-			}
-			if(!$flag)
-				$name_of_wine[] = $row[1];
-		}
-	*/
+		
     }
-	
-	
-	
+
+	//get the wine name and show in the view_wine_name.php
+	//user can end the session in the view_wine_name.php and back to the search page.
 	if(isset($_SESSION['searchsess'])) 
 	{
-        $_SESSION['searchsess'] = $name_of_wine;
-    //    if(count($name_of_wine) > 0) 
 		$template->setVariable("view_wine_list", "<a href='view_wine_names.php'>View a list of all wine names</a>");
     }
 	else 
 		$template->setVariable("view_wine_list", "");
 
-	
-	
 	//check session end or not if end then go to view_wine_names.php
 /*
 	if(isset($_GET['endsession']))
